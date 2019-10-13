@@ -1,0 +1,47 @@
+
+<div class="row">
+    <div class="col-md-6">
+
+    <div class="gameon">
+        <!--<div class="messageContainer" ng-show="game.gameover">-->
+            <!--<div class="winmessage">{{game.winmessage}}<br/> GAME OVER</div>-->
+        <!--</div>-->
+
+        <div class="tableContainer">
+            <div class="gametable">
+                <div ng-repeat="row in rows" class="tablerow">
+                    <div id="{{column.id}}" class="{{column.class}}" ng-repeat="column in row" >
+                        <div ng-click="markPlayerStep(column)" class="boxContent{{column.letter}}"> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="col-md-6">
+    <div>
+
+        <table class="table table-hover table-striped table-condensed" ng-show="stepsInGame.length">
+            <h2 class="lead">История шагов</h2>
+            <thead>
+            <td>Игрок</td>
+            <td>Координаты</td>
+            <td>Дата и время создания шага</td>
+            </thead>
+            <tbody>
+                <tr ng-repeat="step in stepsInGame">
+                    <td>{{step.userName}}</td>
+                    <td>Строка: {{step.boardRow}}, Столбец: {{step.boardColumn}}</td>
+                    <td>{{step.created | date:'MM-dd-yyyy HH:mm:ss'}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div ng-show="!stepsInGame.length">
+                    Нет шагов
+                </div>
+
+    </div>
+</div>
+</div>
