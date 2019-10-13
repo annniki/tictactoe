@@ -20,7 +20,7 @@ public class GameLogic {
     /**
      * Checks if the player wins
      *
-     * @param positions Board positions from player moves retrieved from database
+     * @param positions Board positions from player steps retrieved from database
      * @return true or false if the player is a winner
      */
     static boolean isWinner(List<Position> positions) {
@@ -51,41 +51,17 @@ public class GameLogic {
     }
 
     /**
-     * Stores all pairs of available rows and columns
-     *
-     * @return list of all board's positions
-     */
-    static List<Position> getAllPositions() {
-        List<Position> positions = new ArrayList<>();
-        for (int row = 1; row <= 3; row++) {
-            for (int col = 1; col <= 3; col++) {
-                positions.add(new Position(row, col));
-            }
-        }
-        return positions;
-    }
-
-    /**
-     * @param numberOfFirstPlayerMovesInGame
-     * @param numberOfSecondPlayerMovesInGame
+     * @param numberOfFirstPlayerStepsInGame
+     * @param numberOfSecondPlayerStepsInGame
      * @return true or false depending on the count of the player's moves
      */
-    static boolean playerTurn(int numberOfFirstPlayerMovesInGame, int numberOfSecondPlayerMovesInGame, boolean for_first_player) {
-        return (for_first_player && (numberOfFirstPlayerMovesInGame == numberOfSecondPlayerMovesInGame || numberOfFirstPlayerMovesInGame == 0)
-                || ((!for_first_player && (numberOfFirstPlayerMovesInGame != numberOfSecondPlayerMovesInGame))));
+    static boolean playerTurn(int numberOfFirstPlayerStepsInGame, int numberOfSecondPlayerStepsInGame, boolean for_first_player) {
+        return (for_first_player && (numberOfFirstPlayerStepsInGame == numberOfSecondPlayerStepsInGame || numberOfFirstPlayerStepsInGame == 0)
+                || ((!for_first_player && (numberOfFirstPlayerStepsInGame != numberOfSecondPlayerStepsInGame))));
     }
 
     static boolean isBoardIsFull(List<Position> takenPositions) {
         return takenPositions.size() == 9;
-    }
-
-    // GENERATE COMPUTER'S MOVES
-    static List<Position> getOpenPositions(List<Position> takenPositions) {
-        return getAllPositions().stream().filter(p -> !takenPositions.contains(p)).collect(Collectors.toList());
-    }
-
-    static Position nextAutoStep(List<Position> takenPositions) {
-        return getOpenPositions(takenPositions).get(0);
     }
 
 }

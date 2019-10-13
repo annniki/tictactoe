@@ -141,25 +141,7 @@ gameModule.controller('gameController', ['$rootScope', '$routeParams', '$scope',
         function getNextStep() {
 
             scope.nextStepData = []
-
-            // COMPUTER IS A SECOND PLAYER
-            /*       if(!scope.gameProperties.secondPlayer) {
-                       http.get("/step/autocreate").success(function (data, status, headers, config) {
-                           scope.nextStepData = data;
-                           getStepHistory().success(function () {
-                               var gameStatus = scope.stepsInGame[scope.stepsInGame.length - 1].gameStatus;
-                               if (gameStatus != 'IN_PROGRESS') {
-                                   alert(gameStatus)
-                               }
-                           });
-                       }).error(function (data, status, headers, config) {
-                           scope.errorMessage = "Can't send the step"
-                       });
-
-                       // SECOND PLAYER IS A REAL USER
-                   } else {*/
             console.log(' another player step');
-            //}
         }
 
         function checkIfBoardCellAvailable(boardRow, boardColumn) {

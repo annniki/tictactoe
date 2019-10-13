@@ -67,7 +67,6 @@ public class GameService {
                 GameStatus.IN_PROGRESS).stream().filter(game -> game.getFirstPlayer() == player || game.getSecondPlayer() == player).collect(Collectors.toList());
     }
 
-
     public Game getGame(Long id) {
         return gameRepository.findById(id).orElse(null);
     }

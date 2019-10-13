@@ -38,11 +38,15 @@ public class StepController {
 
     Logger logger = LoggerFactory.getLogger(StepController.class);
 
+    /**
+     * Method for create step
+     * @param createStepDTO
+     * @return Step
+     */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public Step createStep(@RequestBody CreateStepDTO createStepDTO) {
         Long gameId = (Long) httpSession.getAttribute("gameId");
-        logger.info("move to insert:" + createStepDTO.getBoardColumn() + createStepDTO.getBoardRow());
-
+        logger.info("step to insert:" + createStepDTO.getBoardColumn() + createStepDTO.getBoardRow());
 
         Step step = stepService.createStep(gameService.getGame(gameId), playerService.getLoggedUser(), createStepDTO);
         Game game = gameService.getGame(gameId);
@@ -51,21 +55,10 @@ public class StepController {
         return step;
     }
 
-    @RequestMapping(value = "/autocreate", method = RequestMethod.GET)
-    public Step autoCreateStep() {
-        Long gameId = (Long) httpSession.getAttribute("gameId");
-
-        logger.info("AUTO step to insert:");
-
-        Step step = stepService.autoCreatestep(gameService.getGame(gameId));
-
-        Game game = gameService.getGame(gameId);
-        gameService.updateGameStatus(gameService.getGame(gameId), stepService.checkCurrentGameStatus(game));
-
-        return step;
-    }
-
-
+    /**
+     * Get list steps for current game
+     * @return list steps in game
+     */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public List<StepDTO> getStepsInGame() {
 
@@ -74,12 +67,20 @@ public class StepController {
         return stepService.getStepsInGame(gameService.getGame(gameId));
     }
 
+    /**
+     * Get list position
+     * @return list positions steps
+     */
     @RequestMapping(value = "/check", method = RequestMethod.GET)
     public List<Position> validateSteps() {
         Long gameId = (Long) httpSession.getAttribute("gameId");
         return stepService.getPlayerStepPositionsInGame(gameService.getGame(gameId), playerService.getLoggedUser());
     }
 
+    /**
+     * Сhecks if the current player can make a step
+     * @return true or false for step
+     */
     @RequestMapping(value = "/turn", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public boolean isPlayerTurn() {
         Long gameId = (Long) httpSession.getAttribute("gameId");

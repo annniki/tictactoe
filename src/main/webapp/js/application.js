@@ -1,8 +1,5 @@
 var ticTacToe = angular.module('ticTacToe', ['ngRoute','gameModule']);
 
-
-
-
 ticTacToe.config(['$routeProvider', function($routeProvider) {
     $routeProvider.
         when('/player/create', {

@@ -41,19 +41,6 @@ public class StepService {
 
     }
 
-    public Step autoCreatestep(Game game) {
-        Step step = new Step();
-        step.setBoardColumn(GameLogic.nextAutoStep(getTakenStepPositionsInGame(game)).getBoardColumn());
-        step.setBoardRow(GameLogic.nextAutoStep(getTakenStepPositionsInGame(game)).getBoardRow());
-        step.setCreated(new Date());
-        step.setPlayer(null);
-        step.setGame(game);
-
-        stepRepository.save(step);
-
-        return step;
-    }
-
     public GameStatus checkCurrentGameStatus(Game game) {
         if (GameLogic.isWinner(getPlayerStepPositionsInGame(game, game.getFirstPlayer()))) {
             return GameStatus.FIRST_PLAYER_WON;
